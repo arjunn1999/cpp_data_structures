@@ -30,15 +30,37 @@ int main(){
     }
     tmp->next  = added_node;
     
-    //add Node in the middle
+    //add Node in the  index i of the linked list
     Node* middle_node = new Node(20);
     Node* tmp_mid = first;
     int index=2; 
-    for(int i=0;i<index;i++){
-        tmp_mid=tmp->next;
+    for(int i=0;i<index-1;i++){
+        tmp_mid=tmp_mid->next;
     }   
-    middle_node->next = tmp->next;
-    tmp->next=middle_node;
+    middle_node->next = tmp_mid->next;
+    tmp_mid->next=middle_node;
+    //delete node from first
+    tmp = first;
+   first=first->next;
+   delete tmp;
+   //delete from the  index i  of the linked list
+   tmp = first;
+   index =2;
+   for(int i=0;i<index-1;i++){
+    tmp = tmp->next;
+   }
+    Node* tmp_del = tmp->next;
+    tmp->next = tmp->next->next;
+    delete tmp_del;
+    //delete from end of the linked list
+    tmp_del = first;
+    while(tmp_del->next->next!=NULL){
+         tmp_del=tmp_del->next;
+    }
+    tmp = tmp_del->next;
+    tmp_del->next=NULL;
+
+    delete tmp;
  while(first!=NULL){
         cout<<first->data;
         if(first->next!=NULL){
